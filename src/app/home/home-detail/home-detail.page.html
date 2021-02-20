@@ -1,0 +1,52 @@
+<ion-header *ngIf="movieWithDetails">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="home"
+        icon="chevron-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{movieWithDetails.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="movieWithDetails">
+  <ion-item-group
+    style="display: flex; flex-wrap: wrap; justify-content: center"
+  >
+    <ion-card style="max-width: 350px !important">
+      <img
+        src="{{imgBaseUrl + movieWithDetails.poster_path}}"
+        alt="poster movie"
+        style="max-width: 400px"
+      />
+      <ion-card-header>
+        <div style="display: flex">
+          <ion-icon
+            name="calendar-outline"
+            style="margin-right: 5px"
+          ></ion-icon>
+          <ion-card-subtitle>
+            {{movieWithDetails.release_date}}
+          </ion-card-subtitle>
+        </div>
+        <div style="display: flex; margin-top: 5px">
+          <ion-icon
+            name="language-outline"
+            style="margin-right: 5px"
+          ></ion-icon>
+          <ion-card-subtitle>
+            {{movieWithDetails.original_language}}
+          </ion-card-subtitle>
+        </div>
+        <div style="display: flex; margin-top: 5px">
+          <ion-icon name="star-outline" style="margin-right: 5px"></ion-icon>
+          <ion-card-subtitle>
+            {{movieWithDetails.vote_average}}
+          </ion-card-subtitle>
+        </div>
+      </ion-card-header>
+      <ion-card-content> {{movieWithDetails.overview}} </ion-card-content>
+    </ion-card>
+  </ion-item-group>
+</ion-content>

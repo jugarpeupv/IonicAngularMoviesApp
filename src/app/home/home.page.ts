@@ -13,18 +13,26 @@ export class HomePage implements OnInit {
   imgBaseUrl = imgBaseUrl;
   apiKey = api_key;
   timeOutSearch = null;
+  loading = true;
 
   constructor(private movieservice: MoviesService) {}
 
   ngOnInit(){
-    this.movieservice.getMovies().subscribe(data=>{this.moviesList=data.results}); 
+    this.movieservice.getMovies().subscribe(data=>{
+      this.moviesList=data.results;
+      this.loading=false;}); 
   }
 
-  searchMovie(movieTitle){
+  searchMovie(movieTitle:string){
     clearTimeout(this.timeOutSearch);
     this.timeOutSearch = setTimeout(()=>{
-      if(movieTitle){this.movieservice.getMoviesByTitle(movieTitle).subscribe(data=>{this.moviesList=data.results}); }
-      else{this.movieservice.getMovies().subscribe(data=>{this.moviesList=data.results});}
+      this.loading=true;
+      if(movieTitle){this.movieservice.getMoviesByTitle(movieTitle).subscribe(data=>{
+        this.moviesList=data.results
+        this.loading=false;}); }
+      else{this.movieservice.getMovies().subscribe(data=>{
+        this.moviesList=data.results;
+        this.loading=false;});}
     }, 1000)
   }
 
