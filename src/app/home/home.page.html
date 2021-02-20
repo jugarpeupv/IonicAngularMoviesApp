@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Movies List </ion-title>
+  </ion-toolbar>
+  <ion-item>
+    <ion-label position="floating">Search Movie</ion-label>
+    <ion-input (input)="searchMovie($event.target.value)"></ion-input>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let movie of moviesList">
+      <img src="{{imgBaseUrl + movie.poster_path}}" />
+      <ion-card-header>
+        <ion-card-title>{{movie.title}}</ion-card-title>
+        <ion-card-subtitle>{{movie.release_date}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content> {{movie.overview}} </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>
