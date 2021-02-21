@@ -5,25 +5,39 @@
   <div>
     <ion-item>
       <ion-spinner *ngIf="loading" slot="end" name="dots"></ion-spinner>
-      <ion-input
+      <ion-searchbar
         placeholder="Search Movie"
-        (input)="searchMovie($event.target.value)"
-      ></ion-input>
+        (ionInput)="searchMovie($event.target.value)"
+        (ionCancel)="searchMovie('')"
+      ></ion-searchbar>
     </ion-item>
   </div>
 </ion-header>
 
 <ion-content>
+  <ion-item color="danger" style="margin-top: 20px" *ngIf="errorValue"
+    >{{ errorValue }}</ion-item
+  >
+  <ion-content
+    *ngIf="moviesList && moviesList.length === 0"
+    style="text-align: -webkit-center"
+  >
+    <ion-img
+      src="../../assets/dessert.png"
+      style="width: 150px; margin-top: 20px"
+    ></ion-img>
+    <div style="margin-top: 20px; text-align: center">No Movie Found</div>
+  </ion-content>
   <ion-item-group
     style="display: flex; flex-wrap: wrap; justify-content: center"
   >
     <ion-card
       *ngFor="let movie of moviesList"
       style="max-width: 350px !important"
-      [routerLink]="['home-detail', movie.id]"
+      [routerLink]="['movie-detail', movie.id]"
     >
       <img
-        src="{{imgBaseUrl + movie.poster_path}}"
+        [src]="imgBaseUrl + movie.poster_path"
         alt="poster movie"
         style="max-width: 400px"
       />

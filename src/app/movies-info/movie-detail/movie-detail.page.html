@@ -10,8 +10,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="movieWithDetails">
+<ion-content>
+  <ion-item color="danger" *ngIf="errorValue && errorValue.status !== 404"
+    >{{ errorValue.status_message }}</ion-item
+  >
+  <ion-img
+    src="../../assets/404.png"
+    *ngIf="errorValue && errorValue.status === 404"
+    style="margin-top: 150px"
+  >
+  </ion-img>
+
   <ion-item-group
+    *ngIf="movieWithDetails"
     style="display: flex; flex-wrap: wrap; justify-content: center"
   >
     <ion-card style="max-width: 350px !important">
